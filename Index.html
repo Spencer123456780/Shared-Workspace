@@ -1,37 +1,38 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <title>User Page</title>
-  <script src="JavaScript.js"></script>
-  <link rel="stylesheet" href="CSS.css">
-</head>
+  <head>
+   <meta charset="UTF-8" />
+   <title>User Page</title>
+   <script src="JavaScript.js"></script>
+   <link rel="stylesheet" href="CSS.css">
+  </head>
 
-<body>
-  <h1 id="Titles">Add A User Page</h1>
+  <body>
 
-  <br>
+   <div class="Spacing">
+    <form action = "http://localhost:3005/user" method = "POST"> <!--Used for JavaScript-->
+      <h1 id="Titles">Add A User Page</h1>
+      <br> <br> <br>
 
-  <h3>First Name:</h3>
-  <input type="text" name="first_name">
+     First Name: <input type="text" name="first_name">
+      <br> <br>
 
-  <br>
+      Phone Number: <input type="text" name="phone_number">
+     <br> <br>
 
-  <h3>Phone Number:</h3>
-  <input type="number" name="phone_number">
-  <br>
+     E-mail: <input type="email" name="E_mail">
+     <br> <br>
 
-  <h3>E-mail:</h3>
-  <input type="email" name="E_mail">
-  <br>
+      Role:<!--Owner or Co-Worker-->
+       <select name="Role">
+        <option>Owner</option>
+        <option>Co-Worker</option>
+       </select>
+     <br> <br>
 
-  <h3>Role:</h3> //Owner or Co-Worker
+      <button type="submit" id="AddButton">Add</button>
 
-  <br>
-
-  <button type="submit">Add</button>
-
-</body>
-
+   </div>
+  </body>
 </html>
