@@ -1,5 +1,19 @@
 import express from 'express';
 var app = express();
+
+var UserFileExists = fs.existsSync('User.json');
+if (UserFileExists) {
+  console.log('loading'); //So we know its loading
+  var PersonalData = fs.readFileSync('User.json', 'utf8'); // Makes the data be imported
+  obj= JSON.parse(PersonalData); // Converts string to object
+} 
+else {
+  console.log('Created new object') //lets you know object has been created
+  var obj= {user:[]}; //If no object then makes one
+}
+
+
+
 // start the server in the port 3001 !
 var callback = function () {
   
@@ -8,20 +22,35 @@ app.listen(4001, callback);
 
 
 
-// on the request to root (localhost:3001/)
+// on the request to root (localhost:3001/) Start up page when opening for first time
 app.get('/', function (req, res) {
-    res.send();
+    res.send("Wellcome Please Procided to the next page to create a user");
 });
 
 // On localhost:3001/welcome
-app.get('/welcome', function (req, res) {
-    res.send();
+app.get('/User', function (req, res) {
+  res.sendFile( __dirname + "/" + "index.html" );
+});
+
+app.post('/user', urlencodedParser, Newuser);//Posts the user information
+
+app.get('/', function (req, res) {
+  res.send();
+});
+
+app.get('/', function (req, res) {
+  res.send();
+});
+
+app.get('/', function (req, res) {
+  res.send();
 });
 
 // On localhost:3001/login
 app.get('/login', function (req, res) {
     res.send('<p>username<input type="text" /></p>  <p>Password: <input type="text" /> </p> <button>login</button>');
 });
+
 
 
 
