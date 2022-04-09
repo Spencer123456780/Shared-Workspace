@@ -33,11 +33,11 @@ app.get('/User', function (req, res) {
 
 app.post('/user', urlencodedParser, Newuser);//Posts the user information
 
-app.get('/', function (req, res) {
+app.get('/', function (req, res) { // Posts Owner information on properties
   res.send();
 });
 
-app.get('/', function (req, res) {
+app.get('/', function (req, res) { // Updates and adds Information to properties in Ownerproperties webpage
   res.send();
 });
 
