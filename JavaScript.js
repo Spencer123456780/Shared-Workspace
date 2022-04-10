@@ -1,3 +1,6 @@
+//I used nodemon to install for updates to install use this (node i -g nodemon)
+//to run you now use nodemon insted of node
+
 import express from 'express';
 var app = express();
 
@@ -111,3 +114,27 @@ exports.login = async (req, res, next) => {
         }
 
       }
+    }
+  }
+
+
+
+
+
+
+  //EXAMPLE OF DELETE
+  app.delete('/', (req, res) => {
+    //Finding informaion
+    const ;
+    if (!course) {
+      res.status(404).send('Could not be found')
+      return;
+    }
+
+    //Delete
+    const index = courses.indexOf(course);
+    courses.splice(index, 1);
+
+    //Return Response
+    res.send(course);
+  });
