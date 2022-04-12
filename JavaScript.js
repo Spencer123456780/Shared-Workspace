@@ -173,22 +173,19 @@ var Savedata = fs.existsSync('Registration.json')
       Add more to Propertie at http://localhost:${PORT}/"Whatever your propertie Address is."`);
   })
 
+
+
+
+  
+ 
+
+
+
+
   //This is the user page linked to the index.html document http://localhost:8000/user
   app.get('/user', function (req, res) {
     res.sendFile( __dirname + "/" + "index.html" );
     });
-
-  //This is the Owner Properties Creation
-  app.get('/Properties', function (req, res) {
-    res.sendFile( __dirname + "/" + "Owner.html" );
-    });
-  
-  //This is the Properties Workspace for rent
-  app.get('/', function (req, res) {
-    res.sendFile( __dirname + "/" + "OwnerProperties.html" );
-    });
-
-
 //////////////////////
     //Gets the click event for /user. Cickevent = "urlencodedParser". 
   app.post('/userCreated', urlencodedParser, SavingUser);
@@ -213,12 +210,18 @@ var Savedata = fs.existsSync('Registration.json')
   )};
 /////////////////////////
 
+
+  //This is the Properties Creation
+  app.get('/Properties', function (req, res) {
+    res.sendFile( __dirname + "/" + "Property.html" );
+    });
 /////////////////////////
   //This is the clickevent for /Properties
   app.post('/PropertiesCreated', urlencodedParser, SavingPropertie);
 
+  //obj.user.properties.push I am trying to push a new object inside of an existing object
   function SavingPropertie(req, res) {
-    obj.user.push ({
+    obj.user.properties.push ({
       Address:req.body.Address,
       Neighborhood:req.body.Neighborhood,
       Squarefeet:req.body.Squarefeet,
@@ -236,6 +239,46 @@ var Savedata = fs.existsSync('Registration.json')
     }
   )};
 /////////////////////////
+
+
+ //This is the Workspace for rent
+ app.get('/', function (req, res) {
+  res.sendFile( __dirname + "/" + "WorkSpace.html" );
+  });
+/////////////////////////
+
+
+/////////////////////////
+
+//This is the Modifying Webpage
+app.get('/', function (req, res) {
+  res.sendFile( __dirname + "/" + "Modify.html" );
+  });
+/////////////////////////
+
+
+
+////////////////////////
+
+
+//This is for finding users
+app.get('/:first_name', function (req, res) {
+  const { first_name } = req.params;
+
+  const foundUser = users.find((user) => user.first_name === first_name);
+
+
+});
+//This is for deleteing users
+app.delete('/:name', (req, res) => {
+  const { name } = req.params;
+  //Removes the user that finds its name false
+  users = users.filter((user) => user.name !== name);
+});
+
+
+
+
 
 
 
