@@ -11,14 +11,14 @@
   <body>
 
    <div class="Spacing">
-    <form action = "http://localhost:3001/user" method = "POST"> <!--Used for JavaScript-->
+    <form action = "http://localhost:8000/user" method = "POST"> <!--Used for JavaScript-->
       <h1 id="Titles">Add A User Page</h1>
       <br> <br> <br>
 
      First Name: <input type="text" name="first_name">
       <br> <br>
 
-      Phone Number: <input type="text" name="phone_number">
+     Phone Number: <input type="text" name="phone_number">
      <br> <br>
 
      E-mail: <input type="email" name="E_mail">
@@ -27,14 +27,11 @@
      Password: <input type="text" name="Password">
      <br><br>
 
-      Role:<!--Owner or Co-Worker-->
-       <select name="Role">
-        <option>Owner</option>
-        <option>Co-Worker</option>
-       </select>
+     Role: <input type="text" name="Role"> <!--Owner or Co-Worker-->
+       
      <br> <br>
 
-      <button type="submit" id="AddButton">Add</button>
+      <button type="submit" value="submit" id="AddButton">Add</button>
 
       
    </div>

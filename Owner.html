@@ -10,7 +10,7 @@
 
 <body>
   <div class="Spacing">
-  <form action = "" method = "POST">
+  <form action = "http:localhost:8000/userCreated" method = "POST">
   <h1 id="Titles">Owner Page</h1>
   <br> <br>
 
@@ -23,18 +23,10 @@
   Squarefeet: <input type="text" name="Squarefeet">
   <br> <br>
 
-  Parking Garage:
-    <select name="Parking_Garage">
-      <option>Yes</option>
-      <option>No</option>
-    </select>
+  Parking Garage (Yes or No): <input type="text" name="Parking_Garage">
   <br> <br>
 
-  Public Transport:
-    <select name="Public_Transport">
-      <option>Yes</option>
-      <option>No</option>
-    </select>
+  Public Transport (Yes or No): <input type="text" name="Public_Transport">
   <br> <br>
 
   <button type="submit" id="AddButton">Add</button>

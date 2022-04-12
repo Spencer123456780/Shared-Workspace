@@ -1,6 +1,6 @@
 //I used nodemon to install for updates to install use this (node i -g nodemon)
 //to run you now use nodemon insted of node
-
+/*
 import express from 'express';
 var app = express();
 
@@ -138,3 +138,110 @@ exports.login = async (req, res, next) => {
     //Return Response
     res.send(course);
   });
+
+
+*/
+
+
+
+///////////////////////////////////////////////////////////////////////////
+
+
+var express = require('express');
+const app = express();
+const PORT = 8000;
+var bodyParser = require('body-parser');
+var fs = require('fs');
+
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+var Savedata = fs.existsSync('Registration.json')
+    if(Savedata){
+        console.log('Finding Users File');
+        var SaveDatad = fs.readFileSync('Registration.json');
+        obj = JSON.parse(SaveDatad);
+    }
+    else{
+        console.log("Couldnt find File. Creating One");
+        var obj = {user:[]}
+    }
+
+  //This is the home page of http://localhost:8000
+    app.get('/', (req, res) => {
+      res.send(`Create a user at http://localhost:${PORT}/user.
+      Create a Propertie at http://localhost:${PORT}/Properties.
+      Add more to Propertie at http://localhost:${PORT}/"Whatever your propertie Address is."`);
+  })
+
+  //This is the user page linked to the index.html document http://localhost:8000/user
+  app.get('/user', function (req, res) {
+    res.sendFile( __dirname + "/" + "index.html" );
+    });
+
+  //This is the Owner Properties Creation
+  app.get('/Properties', function (req, res) {
+    res.sendFile( __dirname + "/" + "Owner.html" );
+    });
+  
+  //This is the Properties Workspace for rent
+  app.get('/', function (req, res) {
+    res.sendFile( __dirname + "/" + "OwnerProperties.html" );
+    });
+
+
+//////////////////////
+    //Gets the click event for /user. Cickevent = "urlencodedParser". 
+  app.post('/userCreated', urlencodedParser, SavingUser);
+
+  //Pushes the answers to the User.json
+  function SavingUser(req, res) {
+    obj.user.push ({
+      firstName:req.body.first_name,
+      phoneNumber:req.body.phone_number,
+      eMail:req.body.E_mail,
+      Role:req.body.Role,
+    });
+    let NowSaved = JSON.stringify(obj, null, 2);
+    fs.writeFile('User.json', NowSaved, (err) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log('Loading User Page Done');
+      }
+    }
+  )};
+/////////////////////////
+
+/////////////////////////
+  //This is the clickevent for /Properties
+  app.post('/PropertiesCreated', urlencodedParser, SavingPropertie);
+
+  function SavingPropertie(req, res) {
+    obj.user.push ({
+      Address:req.body.Address,
+      Neighborhood:req.body.Neighborhood,
+      Squarefeet:req.body.Squarefeet,
+      ParkingGarage:req.body.Parking_Garage,
+      PublicTransport:req.body.Public_Transport,
+    });
+    let good = JSON.stringify(obj, null, 2);
+    fs.writeFile('User.json', good, (err) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log('Loading Owner Page Done');
+      }
+    }
+  )};
+/////////////////////////
+
+
+
+
+
+
+
+  //Listens to the port(8000)
+  app.listen(PORT, () => console.log(`Server Running on port: http://localhost:${PORT}`));
