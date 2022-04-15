@@ -118,28 +118,6 @@ exports.login = async (req, res, next) => {
   }
 
 
-
-
-
-
-  //EXAMPLE OF DELETE
-  app.delete('/', (req, res) => {
-    //Finding informaion
-    const ;
-    if (!course) {
-      res.status(404).send('Could not be found')
-      return;
-    }
-
-    //Delete
-    const index = courses.indexOf(course);
-    courses.splice(index, 1);
-
-    //Return Response
-    res.send(course);
-  });
-
-
 */
 
 
@@ -155,10 +133,10 @@ var fs = require('fs');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-var Savedata = fs.existsSync('Registration.json')
+var Savedata = fs.existsSync('User.json')
     if(Savedata){
         console.log('Finding Users File');
-        var SaveDatad = fs.readFileSync('Registration.json');
+        var SaveDatad = fs.readFileSync('User.json');
         obj = JSON.parse(SaveDatad);
         obj2 = JSON.parse(SaveDatad);
         obj3 = JSON.parse(SaveDatad);
@@ -179,6 +157,8 @@ var compObj2= {user:[obj2[obj3]]};
 
 
 
+
+
   //This is the home page of http://localhost:8000
     app.get('/', (req, res) => {
       res.send(`Create a user at http://localhost:${PORT}/user.
@@ -187,7 +167,7 @@ var compObj2= {user:[obj2[obj3]]};
   })
 
 
-
+  
 
   
  
@@ -225,7 +205,7 @@ var compObj2= {user:[obj2[obj3]]};
 
 
   //This is the Properties Creation
-  app.get('/Properties', function (req, res) {
+  app.get('/user/Properties', function (req, res) {
     res.sendFile( __dirname + "/" + "Property.html" );
     });
 /////////////////////////
@@ -255,7 +235,7 @@ var compObj2= {user:[obj2[obj3]]};
 
 
  //This is the Workspace for rent
- app.get('/Workspace', function (req, res) {
+ app.get('/user/Properties/Workspace', function (req, res) {
   res.sendFile( __dirname + "/" + "WorkSpace.html" );
   });
 /////////////////////////
@@ -291,7 +271,7 @@ let good = JSON.stringify(obj, null, 2);
 
 
 //This is for finding users
-app.get('/users/:first_name', function (req, res) {
+app.get('/user/:first_name', function (req, res) {
   const { first_name } = req.params;
 
   const foundUser = users.find((user) => user.first_name === first_name);
@@ -311,6 +291,10 @@ app.get('/:Properties/:WorkSpace', function (req, res) {
   const foundWorkSpace = WorkSpaces.find((Work) => Work.WorkSpace === WorkSpace);
 
   res.sendFile( __dirname + "/" + "Modify.html" );
+
+
+
+
   });
 /////////////////////////
 
@@ -319,11 +303,11 @@ app.get('/:Properties/:WorkSpace', function (req, res) {
 
 
 ////////////////////////
-//This is for deleteing users
-app.delete('/users/:first_name', (req, res) => {
-  const { first_name } = req.params;
+//This is for deleteing Properties
+app.delete('/users/:Address', (req, res) => {
+  const { Address } = req.params;
   //Removes the user that finds its name false
-  users = users.filter((user) => user.first_name !== first_name);
+  Properties = Properties.filter((Prop) => Prop.Address !== Address);
 });
 
 
@@ -405,6 +389,36 @@ app.get('/users/Properties/WorkSpace/:Price', function (req, res) {
   res.send(searchPrice);
 });
 ///////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
