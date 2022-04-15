@@ -160,11 +160,24 @@ var Savedata = fs.existsSync('Registration.json')
         console.log('Finding Users File');
         var SaveDatad = fs.readFileSync('Registration.json');
         obj = JSON.parse(SaveDatad);
+        obj2 = JSON.parse(SaveDatad);
+        obj3 = JSON.parse(SaveDatad);
     }
     else{
         console.log("Couldnt find File. Creating One");
         var obj = {user:[]}
     }
+
+var obj2 = {Prop:[]};
+var compObj = {user:[obj2]};
+
+
+var obj3 = {Work:[]};
+var compObj2= {user:[obj2[obj3]]};
+
+
+
+
 
   //This is the home page of http://localhost:8000
     app.get('/', (req, res) => {
@@ -221,7 +234,7 @@ var Savedata = fs.existsSync('Registration.json')
 
   //obj.user.properties.push I am trying to push a new object inside of an existing object
   function SavingPropertie(req, res) {
-    obj.user.properties.push ({
+    obj2.Prop.push ({
       Address:req.body.Address,
       Neighborhood:req.body.Neighborhood,
       Squarefeet:req.body.Squarefeet,
@@ -242,19 +255,35 @@ var Savedata = fs.existsSync('Registration.json')
 
 
  //This is the Workspace for rent
- app.get('/', function (req, res) {
+ app.get('/Workspace', function (req, res) {
   res.sendFile( __dirname + "/" + "WorkSpace.html" );
   });
 /////////////////////////
+app.post('/WorkspaceCreated', urlencodedParser, SaviningWorkSpace);
 
-
+function SaviningWorkSpace(req, res) {
+obj3.Work.push ({
+  WorkSpace:req.body.WorkSpace,
+  Max_Individuals:req.body.Max_Individuals,
+  Smoking:req.body.Smoking,
+  Avalible_Date:req.body.Avalible_Date,
+  Lease_Term:req.body.Lease_Term,
+  Price:req.body.Price,
+});
+let good = JSON.stringify(obj, null, 2);
+    fs.writeFile('User.json', good, (err) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log('Loading Owner Page Done');
+      }
+    }
+  )};
+/////////////////////////
 /////////////////////////
 
-//This is the Modifying Webpage
-app.get('/', function (req, res) {
-  res.sendFile( __dirname + "/" + "Modify.html" );
-  });
-/////////////////////////
+
 
 
 
@@ -262,25 +291,120 @@ app.get('/', function (req, res) {
 
 
 //This is for finding users
-app.get('/:first_name', function (req, res) {
+app.get('/users/:first_name', function (req, res) {
   const { first_name } = req.params;
 
   const foundUser = users.find((user) => user.first_name === first_name);
 
-
+  //This just sends the users information back to the webpage
+  res.send(foundUser);
 });
+
+
+//////////////////////////
+//This is the Modifying Webpage
+app.get('/:Properties/:WorkSpace', function (req, res) {
+  const { Address } = req.params;
+  const { WorkSpace } = req.params;
+
+  const foundProperties = Properties.find((Prop) => Prop.Address === Address);
+  const foundWorkSpace = WorkSpaces.find((Work) => Work.WorkSpace === WorkSpace);
+
+  res.sendFile( __dirname + "/" + "Modify.html" );
+  });
+/////////////////////////
+
+
+
+
+
+////////////////////////
 //This is for deleteing users
-app.delete('/:name', (req, res) => {
-  const { name } = req.params;
+app.delete('/users/:first_name', (req, res) => {
+  const { first_name } = req.params;
   //Removes the user that finds its name false
-  users = users.filter((user) => user.name !== name);
+  users = users.filter((user) => user.first_name !== first_name);
 });
 
 
+///////////////////////////
+//OWNER ENDS HERE
+//////////////////////////
+//Co-Worker Begins
 
 
+//This is for Searching up a place by each catigory
+//////////////////////////
+//This is Address search
+app.get('/users/Properties/:Address', function (req, res) {
+  const { Address } = req.params;
+  const searchAddress = Add.find((Prop) => Prop.Address === Address);
+  res.send(searchAddress);
+});
 
+//This is neighborhood
+app.get('/users/Properties/:Neighborhood', function (req, res) {
+  const { Neighborhood } = req.params;
+  const searchNeighborhood = Neigh.find((Prop) => Prop.Neighborhood === Neighborhood);
+  res.send(searchNeighborhood);
+});
 
+//This is square feet
+app.get('/users/Properties/:Squarefeet', function (req, res) {
+  const { Squarefeet } = req.params;
+  const searchSquarefeet = Square.find((Prop) => Prop.Squarefeet === Squarefeet);
+  res.send(searchSquarefeet);
+});
+
+//This is with/without parking
+app.get('/users/Properties/:Parking_Garage', function (req, res) {
+  const { Parking_Garage } = req.params;
+  const searchParking_Garage = Parking.find((Prop) => Prop.Parking_Garage === Parking_Garage);
+  res.send(searchParking_Garage);
+});
+
+//This is with/without public transportation
+app.get('/users/Properties/:Public_Transport', function (req, res) {
+  const { Public_Transport } = req.params;
+  const searchPublic_Transport = Transport.find((Prop) => Prop.Public_Transport === Public_Transport);
+  res.send(searchPublic_Transport);
+});
+
+//This is number of individuals it can seat
+app.get('/users/Properties/WorkSpace/:Max_Individuals', function (req, res) {
+  const { Max_Individuals } = req.params;
+  const searchMax_Individuals = Max.find((Work) => Work.Max_Individuals === Max_Individuals);
+  res.send(searchMax_Individuals);
+});
+
+//This is with/without smoking
+app.get('/users/Properties/WorkSpace/:Smoking', function (req, res) {
+  const { Smoking } = req.params;
+  const searchSmoking = Smoke.find((Work) => Work.Smoking === Smoking);
+  res.send(searchSmoking);
+});
+
+//This is availability date
+app.get('/users/Properties/WorkSpace/:Avalible_Date', function (req, res) {
+  const { Avalible_Date } = req.params;
+  const searchAvalible_Date = Avalible.find((Work) => Work.Avalible_Date === Avalible_Date);
+  res.send(searchAvalible_Date);
+});
+
+//This is lease term
+app.get('/users/Properties/WorkSpace/:Lease_Term', function (req, res) {
+  const { Lease_Term } = req.params;
+  const searchLease_Term = Lease.find((Work) => Work.Lease_Term === Lease_Term);
+  res.send(searchLease_Term);
+});
+
+//This is Price
+app.get('/users/Properties/WorkSpace/:Price', function (req, res) {
+  const { Price } = req.params;
+  const searchPrice = Pri.find((Work) => Work.Price === Price);
+  res.send(searchPrice);
+});
+///////////////////////////////////////
 
 
 
