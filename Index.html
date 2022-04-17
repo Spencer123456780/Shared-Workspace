@@ -27,7 +27,12 @@
      Password: <input type="text" name="password">
      <br><br>
 
-     Role: <input type="text" name="Role"> <!--Owner or Co-Worker-->
+     Role:  <select class="form-select" id="usertype" required>
+                <option selected>Choose...</option>
+                <option id="Owner" value="Owner">Owner</option>
+                <option id="Co-Worker" value="Co-Worker">Co-Worker</option>
+
+              </select> <!--Owner or Co-Worker-->
        
      <br> <br>
 
