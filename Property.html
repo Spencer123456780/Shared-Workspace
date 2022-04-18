@@ -7,13 +7,34 @@
   <script src="JavaScript.js"></script>
   <link rel="stylesheet" href="CSS.css">
 </head>
-
+<style>
+  #Titles{
+    text-align:center;
+  }
+  
+  .Spacing{
+    margin:auto;
+    margin-top:130px; 
+    width: 750px; 
+    border-radius: 10%; 
+    padding: 30px; 
+    background-color:#999999;
+  }
+  
+  #AddButton{
+    margin-left: 80%;
+    width:100px;
+  }
+</style>
 <body>
   <div class="Spacing">
-  <form action = "http:localhost:8000/userCreated" method = "POST">
-  <h1 id="Titles">Owner Page</h1>
+  <form action = "http://localhost:8000/PropertiesCreated" method = "post">
+  <h1 id="Titles">Owner Property's Page</h1>
   <br> <br>
 
+  Owner Name: <input type="text" name="Name">
+  <br> <br>
+  
   Address: <input type="text" name="Address">
   <br> <br>
 

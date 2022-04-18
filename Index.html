@@ -7,11 +7,29 @@
    <script src="JavaScript.js"></script>
    <link rel="stylesheet" href="CSS.css">
   </head>
-
+  <style>
+    #Titles{
+      text-align:center;
+    }
+    
+    .Spacing{
+      margin:auto;
+      margin-top:130px; 
+      width: 750px; 
+      border-radius: 10%; 
+      padding: 30px; 
+      background-color:#999999;
+    }
+    
+    #AddButton{
+      margin-left: 80%;
+      width:100px;
+    }
+  </style>
   <body>
 
    <div class="Spacing">
-    <form action = "http://localhost:8000/user" method = "POST"> <!--Used for JavaScript-->
+    <form action = "http://localhost:8000/userCreated" method = "post"> <!--Used for JavaScript-->
       <h1 id="Titles">Add A User Page</h1>
       <br> <br> <br>
 
@@ -21,17 +39,14 @@
      Phone Number: <input type="text" name="phone_number">
      <br> <br>
 
-     E-mail: <input type="email" name="E_mail">
+     E-mail: <input type="text" name="E_mail">
      <br> <br>
 
-     Password: <input type="text" name="password">
-     <br><br>
-
-     Role: <input type="text" name="Role"> <!--Owner or Co-Worker-->
+     Role (Owner or CoWorker): <input type="text" name="Role"> <!--Owner or Co-Worker-->
        
      <br> <br>
 
-      <button type="submit" value="submit" id="AddButton">Add</button>
+     <button type="submit" value="submit" id="AddButton">Add</button>
 
       
    </div>

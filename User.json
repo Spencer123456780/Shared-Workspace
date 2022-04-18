@@ -1,11 +1,44 @@
 {
-    "user": [
-      {
-        "first_name": "Spink",
-        "phone_number": "Link",
-        "E_mail": "cat@google.ca",
-        "Password": "1234",
-        "Role": "Owner"
-      }
-    ]
-  }
+  "user": [
+    {
+      "first_name": "Spink",
+      "phone_number": "Link",
+      "E_mail": "cat@google.ca",
+      "Role": "Owner"
+    },
+    {
+      "firstName": "111",
+      "phoneNumber": "123",
+      "eMail": "115111@gg.Bobang",
+      "Role": "Owner"
+    },
+    {
+      "firstName": "WAM",
+      "phoneNumber": "BAM",
+      "eMail": "BOOM@CO.CA",
+      "Role": "CoWorker"
+    }
+  ],
+  "Prop": [
+    {
+      "Owner Name": "111",
+      "Address": "123",
+      "Neighborhood": "123",
+      "Squarefeet": "1",
+      "Parking_Garage": "1",
+      "Public_Transport": "1"
+    }
+  ],
+  "Work": [
+    {
+      "Owner Name": "111",
+      "Address": "123",
+      "WorkSpace": "1",
+      "Max_Individuals": "1",
+      "Smoking": "1",
+      "Avalible_Date": "1",
+      "Lease_Term": "1",
+      "Price": "1"
+    }
+  ]
+}
