@@ -5,6 +5,51 @@
   <title>Login Page</title>
   <script src="JavaScript.js"></script>
   <link rel="stylesheet" href="CSS.css">
+  <script>
+    $(document).ready(function () {
+      $("#login").blur(function () {
+
+        var fn = $("#fn").val();
+        var pwd2= $("#pwd").val();
+
+        var url2 = "/check-login?fn=" + firstName + "&pass=" + pwd;
+        $.get(url2, function (responseLOG) {
+          if (responseLOG.length == 0)
+            alert("invalid")
+          else
+          localStorage.setItem("kuchid",fn)
+            
+            alert("accessed")
+        });
+      });
+    });
+    $(document).ready(function () {
+      $("#login").click(function () {
+
+        var fn = $("#irstName").val();
+        var pwd = $("#pass").val();
+
+        var url2 = "/ajax-check-login?fn=" + firstName + "&pwd=" + pass;
+        $.get(url2, function (responseLOG) {
+          if (responseLOG.length == 1) {
+            localStorage.setItem("kuchid",fn);
+            var fn=localStorage.getItem("kuchid");
+            
+            alert("Accessed");
+            if (responseLOG[0].utype == "Owner") {
+              window.location = "needy-dash.html";
+            }
+            else {
+              window.location = "med-provider-dash.html";
+            }
+          }
+          else {
+            alert("Invalid FirstName and Password");
+          }
+
+        });
+      });
+    });</script>
 </head>
 <body>
   <div class="Spacing">
