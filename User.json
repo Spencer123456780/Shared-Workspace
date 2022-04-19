@@ -4,14 +4,12 @@
       "firstName": "Bob",
       "phoneNumber": "12345",
       "eMail": "Test@email.com",
-      "password": "1234",
-      "Role": "Coworker"
+      "Role": "Owner"
     },
     {
       "firstName": "Spencer",
       "phoneNumber": "403-399-000",
       "eMail": "New@email.com",
-      "password": "1234",
       "Role": "CoWorker"
     }
   ],

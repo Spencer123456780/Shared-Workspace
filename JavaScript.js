@@ -143,6 +143,8 @@ app.get('/user/login/:mail', function  (req, res) {
       } 
       if (myRole === "Owner"){
         res.send("Wellcome " + JSON.stringify(Login) + " You have successful Login. " + "........" +
+         "Create A Property at http://localhost:8000/Properties" + "........." +
+         "Create A WorkSpace at http://localhost:8000/Workspace" + "..........." +
          " To Delete a Property go to http://localhost:8000/Properties/delete/'Peremeter'/'Peremeter Value'" + "........" +
          " To Delete a WorkSpace go to http://localhost:8000/WorkSpace/delete/'Peremeter'/'Peremeter Value'" + "........" +
          " To Modify A Property go to http://localhost:8000/Modify/WorkSpace. " + "........" +
