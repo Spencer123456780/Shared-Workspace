@@ -9,10 +9,10 @@
     $(document).ready(function () {
       $("#login").blur(function () {
 
-        var fn = $("#fn").val();
+        var fn = $("#Email").val();
         var pwd2= $("#pwd").val();
 
-        var url2 = "/check-login?fn=" + firstName + "&pass=" + pwd;
+        var url2 = "/login?Email=" + E_mail + "&pass=" + pwd;
         $.get(url2, function (responseLOG) {
           if (responseLOG.length == 0)
             alert("invalid")
@@ -26,10 +26,10 @@
     $(document).ready(function () {
       $("#login").click(function () {
 
-        var fn = $("#irstName").val();
+        var fn = $("#Email").val();
         var pwd = $("#pass").val();
 
-        var url2 = "/ajax-check-login?fn=" + firstName + "&pwd=" + pass;
+        var url2 = "/login?Email=" + E_mail + "&pwd=" + pass;
         $.get(url2, function (responseLOG) {
           if (responseLOG.length == 1) {
             localStorage.setItem("kuchid",fn);
@@ -57,9 +57,9 @@
    <h1 id="Titles">Login Page</h1>
    <br>
 
-   <h3>First Name:</h3> <!--on entering name should show any properties from owners as to modify and delete any items..
+   <h3>Emailid:</h3> <!--on entering name should show any properties from owners as to modify and delete any items..
                       Co-woerker find owner info and propertie details.-->
-   <input type="text" name="firstName" id="fn>
+   <input type="text" name="E_mail" id="Email">
 
    <h3>Password:</h3> 
    <input type="text" name="Pass" id="pwd">
