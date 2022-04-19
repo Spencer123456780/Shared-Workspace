@@ -1,44 +1,40 @@
 {
   "user": [
     {
-      "first_name": "Spink",
-      "phone_number": "Link",
-      "E_mail": "cat@google.ca",
-      "Role": "Owner"
+      "firstName": "Bob",
+      "phoneNumber": "12345",
+      "eMail": "Test@email.com",
+      "password": "1234",
+      "Role": "Coworker"
     },
     {
-      "firstName": "111",
-      "phoneNumber": "123",
-      "eMail": "115111@gg.Bobang",
-      "Role": "Owner"
-    },
-    {
-      "firstName": "WAM",
-      "phoneNumber": "BAM",
-      "eMail": "BOOM@CO.CA",
+      "firstName": "Spencer",
+      "phoneNumber": "403-399-000",
+      "eMail": "New@email.com",
+      "password": "1234",
       "Role": "CoWorker"
     }
   ],
   "Prop": [
     {
-      "Owner Name": "111",
-      "Address": "123",
-      "Neighborhood": "123",
-      "Squarefeet": "1",
-      "Parking_Garage": "1",
-      "Public_Transport": "1"
+      "Owner Name": "Bob",
+      "Address": "aaaaaaaaaaaaaaaaaaaaaaaaaaa1",
+      "Neighborhood": "aaaaaaaaaaaaaaaaaaaaa",
+      "Squarefeet": "aaaaaaaaaaaaaaaaaaaaaaa",
+      "Parking_Garage": "aaaaaaaaaaaaaaaaaaaaaaaa",
+      "Public_Transport": "1aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     }
   ],
   "Work": [
     {
-      "Owner Name": "111",
-      "Address": "123",
-      "WorkSpace": "1",
-      "Max_Individuals": "1",
-      "Smoking": "1",
-      "Avalible_Date": "1",
-      "Lease_Term": "1",
-      "Price": "1"
+      "Owner Name": "Bob",
+      "Address": "aaaaaaaaaaaaaaaaaaaaaaaaaaa1",
+      "WorkSpace": "111111111111111111111111",
+      "Max_Individuals": "2222222222222222222222222",
+      "Smoking": "33333333333333333333333333333",
+      "Avalible_Date": "44444444444444444444444444",
+      "Lease_Term": "55555555555555555555555555",
+      "Price": "6666666666666666666666666666666"
     }
   ]
 }

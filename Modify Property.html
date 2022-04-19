@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Properties</title>
+</head>
+<style>
+    #Titles{
+      text-align:center;
+    }
+    
+    .Spacing{
+      margin:auto;
+      margin-top:130px; 
+      width: 750px; 
+      border-radius: 10%; 
+      padding: 30px; 
+      background-color:#4f6bf3;
+    }
+    
+    #AddButton{
+      margin-left: 80%;
+      width:100px;
+    }
+  </style>
+<body>
+    <form action = "/Modify/Property/Created" method = "post">
+    <h1 id="Titles">Modify Property</h1>
+    Old Address: <input type="text" name="ModifyAddress">
+    <br>
+    New Address: <input type="text" name="ModifyedAddress">
+    <br><br>
+
+    Old Neighborhood: <input type="text" name="ModifyNeighborhood">
+    <br>
+    New  Neighborhood: <input type="text" name="ModifyedNeighborhood">
+
+    <br><br>
+
+    Old Squarefeet: <input type="text" name=" ModifySquarefeet">
+    <br>
+    New  Squarefeet: <input type="text" name=" ModifyedSquarefeet">
+
+    <br><br>
+
+    Old Parking Garage (Yes or No): <input type="text" name="ModifyParking_Garage">
+    <br>
+    New Parking Garage (Yes or No): <input type="text" name="ModifyedParking_Garage">
+
+    <br><br>
+
+    Old Public Transport (Yes or No): <input type="text" name="ModifyPublic_Transport">
+    <br>
+    New Public Transport (Yes or No): <input type="text" name="ModifyedPublic_Transport">
+
+    <br><br>
+
+    <button type="submit" id="AddButton">Modify</button>
+</body>
+</html>

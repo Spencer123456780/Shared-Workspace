@@ -8,7 +8,6 @@ const { json } = require('express/lib/response');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var urlencodedParser2 = bodyParser.urlencoded({ extended: false })
 var urlencodedParser3 = bodyParser.urlencoded({ extended: false })
-
 var Savedata = fs.existsSync('User.json')
     if(Savedata){
         console.log('Finding Users File');
@@ -33,9 +32,7 @@ var Savedata = fs.existsSync('User.json')
       res.sendFile( __dirname + "/" + "WellcomePage.html" );
   });
 ///////////////////////////////////////
-///////////////////////////////////////
 
- 
 
 
 
@@ -54,6 +51,7 @@ var Savedata = fs.existsSync('User.json')
       firstName:req.body.first_name,
       phoneNumber:req.body.phone_number,
       eMail:req.body.E_mail,
+      password:req.body.password,
       Role:req.body.Role,
     });
     let NowSaved = JSON.stringify(obj, null, 2);
@@ -68,12 +66,11 @@ var Savedata = fs.existsSync('User.json')
   )};
 ///////////////////////////////
 
-
   //This is the Properties Creation
   app.get('/Properties', function (req, res) {
     res.sendFile( __dirname + "/" + "Property.html" );
     });
-/////P//R//O//P//E//R//T//Y/////
+/////P//R//O//P//E//R//T//Y//////
   //This is the clickevent for /Properties
   app.post('/PropertiesCreated', urlencodedParser2, SavingPropertie);
 
@@ -97,7 +94,6 @@ var Savedata = fs.existsSync('User.json')
     }
   )};
 //////////////////////////////
-
 
  //This is the Workspace for rent
  app.get('/Workspace', function (req, res) {
@@ -132,41 +128,40 @@ let good = JSON.stringify(obj3, null, 2);
 
 
 
-
-//////L//O//G//I//N///////
-app.get('/user/login/:Email', function (req, res) {
-  var { Emails } = req.params;
-  var EmailAddress;
+///////////L//O//G//I//N//////////////
+app.get('/user/login/:mail', function  (req, res) {
+  var mail = req.params.E_mail;
+  var Login;
 
   for (var i = 0, l = obj.user.length; i < l; i++) {
-    var myobj = obj.user[i].E_mail;
-    var NewRole = obj.user[i].Role;
-    if(Emails == myobj){
-      EmailAddress = {
+    var myEmail = obj.user[i].E_mail;
+    var myRole = obj.user[i].Role;
+    if(mail == myEmail){
+    Login = {
         E_mail:req.params.Email,
         Role:obj.user[i].Role,
+      } 
+      if (myRole === "Owner"){
+        res.send("Wellcome " + JSON.stringify(Login) + " You have successful Login. " + "........" +
+         " To Delete a Property go to http://localhost:8000/Properties/delete/'Peremeter'/'Peremeter Value'" + "........" +
+         " To Delete a WorkSpace go to http://localhost:8000/WorkSpace/delete/'Peremeter'/'Peremeter Value'" + "........" +
+         " To Modify A Property go to http://localhost:8000/Modify/WorkSpace. " + "........" +
+         " To Modify A WorkSpace go to http://localhost:8000/Modify/Property.");   
       }
-    }
+      else if (myRole === "CoWorker"){
+        res.send("Wellcome " + JSON.stringify(Login) + " You have successful Login " + ".........." +
+        "You Can Search For Propertys by going to http://localhost:8000/Properties/'Property Peremeter'/'Peremeter Value'" + "........." +
+        " You Can Search for WorkSpaces by going to http://localhost:8000/WorkSpace/'WorkSpace Peremeter'/'Peremeter Value'" + "........." +
+        " You Can Search for a Owners Details by going to http://localhost:8000/user/find/:name");
+      }
+      else {
+      res.send("No Account found!");
+      } 
+    }  
   }
-
-  if (NewRole === "Owner"){
-    res.send("Wellcome " + JSON.stringify(EmailAddress) + " You have successful Login. " + " To Delete a Property go to http://localhost:8000/Properties/delete/:Address." +
-     " To delete a WorkSpace go to http://localhost:8000/WorkSpace/delete/:WorkSpace. " +
-     " To Modify A Property go to http://localhost:8000/Modify/Property/:Address. " +
-     " To Modify A WorkSpace go to http://localhost:8000/Modify/WorkSpace/:WorkSpace.");   
-  }
-  else if (NewRole === "CoWorker"){
-    res.send("Wellcome " + JSON.stringify(EmailAddress) + " You have successful Login " + "You Can Search For Propertys by going to http://localhost:8000/Properties/'Peremeter'/'Peremeter Value'" + 
-    " You Can Search for WorkSpaces by going to http://localhost:8000/WorkSpace/'Peremeter'/'Peremeter Value'" +
-    " You Can Search for a Owners Details by going to http://localhost:8000/user/find/:name");
-  }
-  else {
-    res.send("No Account found!");
-  }
-
-});
-/////////////////////////
-/////////////////////////
+}); 
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
 
 
 
@@ -176,109 +171,99 @@ app.get('/user/login/:Email', function (req, res) {
 ///M//O//D//I//F//Y//I//N//G///
 ////////////////////////////////
 //This is the Modifying Propertys
-app.put('Modify/Property/:Address', function (req, res){
-
-//Make a search function
-//find that value
-//declare that value
-//update that value
-
-
-
-
-  for (var i = 0, l = obj2.Prop.length; i < l; i++) {
-    var myobj = obj2.Prop[i].Address;
-    if(Address == myobj){
-      reply={
-        Address:req.params.Address,
-        Neighborhood:obj2.Prop[i].Neighborhood,
-        Squarefeet:obj2.Prop[i].Squarefeet,
-        Parking_Garage:obj2.Prop[i].Parking_Garage,
-        Public_Transport:obj2.Prop[i].Public_Transport,
-      }
-    }
-  }
-  
-  
-  res.sendFile( __dirname + "/" + "Property.html" );
-
-
-  
-
-
-
-
-
-
-
-
-  
-  const { Address } = req.params;
-  const { Neighborhood, Squarefeet, Parking_Garage, Public_Transport } = req.body
-
-  const Prop = Props.find((Prop) => Prop.Address === Address);
-
-  if(Neighborhood){
-    Prop.Neighborhood = Neighborhood;
-  }
-  if(Squarefeet){
-    Prop.Squarefeet = Squarefeet;
-  }
-  if(Parking_Garage){
-    Prop.Parking_Garage = Parking_Garage;
-  }
-  if(Public_Transport){
-    Prop.Public_Transport = Public_Transport;
-  }
+app.get('/Modify/Property', function (req, res){
+  res.sendFile( __dirname + "/" + "Modify Property.html" );
 });
 
 
+app.put('/Modify/Property/Created', function (req, res) {
+  const { ModifyAddress,  ModifyNeighborhood, ModifySquarefeet, ModifyParking_Garage, ModifyPublic_Transport } = req.body;
+  const { ModifyedAddress, ModifyedNeighborhood, ModifyedSquarefeet, ModifyedParking_Garage, ModifyedPublic_Transport } = req.body;
+  var reply;
 
-//This is the Modifying WorkSpace
-app.patch('/Modify/WorkSpace/:WorkSpace', function (req, res) {
-  res.sendFile( __dirname + "/" + "WorkSpace.html" );
-  const { WorkSpace } = req.params;
-  const { Max_Individuals, Smoking, Avalible_Date, Lease_Term, Price } = req.body
 
   for (var i = 0, l = obj3.Work.length; i < l; i++) {
-    var myobj = obj3.Work[i].WorkSpace;
-    if(WorkSpace == myobj){
-      reply={
-        WorkSpace:req.params.WorkSpace,
-        Max_Individuals:obj3.Work[i].WorkSpace,
-        Smoking:obj3.Work[i].Smoking,
-        Avalible_Date:obj3.Work[i].Avalible_Date,
-        Lease_Term:obj3.Work[i].Lease_Term,
-        Price:obj3.Work[i].Price,
+    var addobj = obj3.Work[i].ModifyAddress;
+    var negobj = obj3.Work[i].ModifyNeighborhood;
+    var squarobj = obj3.Work[i].ModifySquarefeet;
+    var parkobj = obj3.Work[i].ModifyParking_Garage;
+    var transobj = obj3.Work[i].ModifyPublic_Transport;
+
+    if(ModifyAddress == addobj){
+      addobj = ModifyedAddress
+      }
+      else if (ModifyNeighborhood == negobj){
+        negobj = ModifyedNeighborhood
+      }
+      else if (ModifySquarefeet == squarobj){
+        squarobj = ModifyedSquarefeet
+      }
+      else if (ModifyParking_Garage == parkobj){
+        parkobj = ModifyedParking_Garage
+      }
+      else if (ModifyPublic_Transport == transobj){
+        transobj = ModifyedPublic_Transport
       }
     }
-  }
 
-  if(Max_Individuals){
-    Work.Max_Individuals = Max_Individuals;
-  }
-  if(Smoking){
-    Work.Smoking = Smoking;
-  }
-  if(Avalible_Date){
-    Work.Avalible_Date = Avalible_Date;
-  }
-  if(Lease_Term){
-    Work.Lease_Term = Lease_Term;
-  }
-  if(Price){
-    Work.Price = Price;
-  }
+  res.send("all propertys updated");
+});
+
+
+
+//WorkSpace
+app.get('/Modify/WorkSpace', function (req, res){
+  res.sendFile( __dirname + "/" + "Modify WorkSpace.html" );
+});
+
+
+app.put('/Modify/WorkSpace/Created', function (req, res) {
+  const { ModifyWorkSpace,  ModifyMax_Individuals, ModifySmoking, ModifyAvalible_Date, ModifyLease_Term, ModifyPrice } = req.body;
+  const { ModifyedWorkSpace, ModifyedMax_Individuals, ModifyedSmoking, ModifyedAvalible_Date, ModifyedLease_Term, ModifyedPrice} = req.body;
+  var reply;
+
+
+  for (var i = 0, l = obj3.Work.length; i < l; i++) {
+    var workobj = obj3.Work[i].ModifyWorkSpace;
+    var maxobj = obj3.Work[i].ModifyMax_Individuals;
+    var smokeobj = obj3.Work[i].ModifySmoking;
+    var avalobj = obj3.Work[i].ModifyAvalible_Date;
+    var leaseobj = obj3.Work[i].ModifyLease_Term;
+    var pricobj = obj3.Work[i].ModifyPrice;
+
+    if(ModifyWorkSpace == workobj){
+      workobj = ModifyedWorkSpace
+      }
+      else if (ModifyMax_Individuals == maxobj){
+        maxobj = ModifyedMax_Individuals
+      }
+      else if (ModifySmoking == smokeobj){
+        smokeobj = ModifyedSmoking
+      }
+      else if (ModifyAvalible_Date == avalobj){
+        avalobj = ModifyedAvalible_Date
+      }
+      else if (ModifyLease_Term == leaseobj){
+        leaseobj = ModifyedLease_Term
+      }
+      else if (ModifyPrice == pricobj){
+        pricobj = ModifyedPrice
+      }
+    }
+
+  res.send("all workspaces updated");
 });
 ////////////////////////////////
 ////////////////////////////////
+
+
 
 
 
 
 //D//E///L//E//T/E//I//I//N//G//
 //This is for deleteing Properties
-app.delete('/Properties/delete/:Address', (req, res) => {
+app.delete('/Properties/delete/Address/:Address', (req, res) => {
   const { Address } = req.params;
   //Removes the Property that finds its Address legth 
   for (var i = 0, l = obj2.Prop.length; i < l; i++) {
@@ -286,18 +271,71 @@ app.delete('/Properties/delete/:Address', (req, res) => {
     if(Address == myobj){
       reply={
         Address:req.params.Address,
-        Neighborhood:obj2.Prop[i].Neighborhood,
-        Squarefeet:obj2.Prop[i].Squarefeet,
-        Parking_Garage:obj2.Prop[i].Parking_Garage,
-        Public_Transport:obj2.Prop[i].Public_Transport,
       }
     }
   }
   res.send(JSON.stringify(reply) + "Is now Deleted");
 });
 
+app.delete('/Properties/delete/Neighborhood/:Neighborhood', (req, res) => {
+  const { Neighborhood } = req.params;
+  //Removes the Property that finds its Address legth 
+  for (var i = 0, l = obj2.Prop.length; i < l; i++) {
+    var myobj = obj2.Prop[i].Neighborhood;
+    if(Neighborhood == myobj){
+      reply={
+        Neighborhood:req.params.Neighborhood,
+      }
+    }
+  }
+  res.send(JSON.stringify(reply) + "Is now Deleted");
+});
+
+app.delete('/Properties/delete/Squarefeet/:Squarefeet', (req, res) => {
+  const { Squarefeet } = req.params;
+  //Removes the Property that finds its Address legth 
+  for (var i = 0, l = obj2.Prop.length; i < l; i++) {
+    var myobj = obj2.Prop[i].Squarefeet;
+    if(Squarefeet == myobj){
+      reply={
+        Squarefeet:req.params.Squarefeet,
+      }
+    }
+  }
+  res.send(JSON.stringify(reply) + "Is now Deleted");
+});
+
+app.delete('/Properties/delete/Parking_Garage/:Parking_Garage', (req, res) => {
+  const { Parking_Garage } = req.params;
+  //Removes the Property that finds its Address legth 
+  for (var i = 0, l = obj2.Prop.length; i < l; i++) {
+    var myobj = obj2.Prop[i].Parking_Garage;
+    if(Parking_Garage == myobj){
+      reply={
+        Parking_Garage:req.params.Parking_Garage,
+      }
+    }
+  }
+  res.send(JSON.stringify(reply) + "Is now Deleted");
+});
+
+app.delete('/Properties/delete/:Public_Transport', (req, res) => {
+  const { Public_Transport } = req.params;
+  //Removes the Property that finds its Address legth 
+  for (var i = 0, l = obj2.Prop.length; i < l; i++) {
+    var myobj = obj2.Prop[i].Public_Transport;
+    if(Public_Transport == myobj){
+      reply={
+        Public_Transport:req.params.Public_Transport,
+      }
+    }
+  }
+  res.send(JSON.stringify(reply) + "Is now Deleted");
+});
+
+
 //For Deleteing WorkSpaces
-app.delete('/WorkSpace/delete/:WorkSpace', (req, res) => {
+app.delete('/WorkSpace/delete/WorkSpace/:WorkSpace', (req, res) => {
   const { WorkSpace } = req.params;
   //Removes the WorkSpace that finds its Name legth
   for (var i = 0, l = obj3.Work.length; i < l; i++) {
@@ -305,27 +343,92 @@ app.delete('/WorkSpace/delete/:WorkSpace', (req, res) => {
     if(WorkSpace == myobj){
       reply={
         WorkSpace:req.params.WorkSpace,
-        Max_Individuals:obj3.Work[i].WorkSpace,
-        Smoking:obj3.Work[i].Smoking,
-        Avalible_Date:obj3.Work[i].Avalible_Date,
-        Lease_Term:obj3.Work[i].Lease_Term,
-        Price:obj3.Work[i].Price,
+      }
+    }
+  }
+  res.send(json.stringify(reply) + "Is now deleted")
+});
+
+app.delete('/WorkSpace/delete/Max_Individuals/:Max_Individuals', (req, res) => {
+  const { Max_Individuals } = req.params;
+  //Removes the WorkSpace that finds its Name legth
+  for (var i = 0, l = obj3.Work.length; i < l; i++) {
+    var myobj = obj3.Work[i].Max_Individuals;
+    if(Max_Individuals == myobj){
+      reply={
+        Max_Individuals:req.params.Max_Individuals,
+      }
+    }
+  }
+  res.send(json.stringify(reply) + "Is now deleted")
+});
+
+app.delete('/WorkSpace/delete/Smoking/:Smoking', (req, res) => {
+  const { Smoking } = req.params;
+  //Removes the WorkSpace that finds its Name legth
+  for (var i = 0, l = obj3.Work.length; i < l; i++) {
+    var myobj = obj3.Work[i].Smoking;
+    if(Smoking == myobj){
+      reply={
+        Smoking:req.params.Smoking,
+      }
+    }
+  }
+  res.send(json.stringify(reply) + "Is now deleted")
+});
+
+app.delete('/WorkSpace/delete/Avalible_Date/:Avalible_Date', (req, res) => {
+  const { Avalible_Date } = req.params;
+  //Removes the WorkSpace that finds its Name legth
+  for (var i = 0, l = obj3.Work.length; i < l; i++) {
+    var myobj = obj3.Work[i].Avalible_Date;
+    if(Avalible_Date == myobj){
+      reply={
+        Avalible_Date:req.params.Avalible_Date,
+      }
+    }
+  }
+  res.send(json.stringify(reply) + "Is now deleted")
+});
+
+app.delete('/WorkSpace/delete/Lease_Term/:Lease_Term', (req, res) => {
+  const { Lease_Term } = req.params;
+  //Removes the WorkSpace that finds its Name legth
+  for (var i = 0, l = obj3.Work.length; i < l; i++) {
+    var myobj = obj3.Work[i].Lease_Term;
+    if(Lease_Term == myobj){
+      reply={
+        Lease_Term:req.params.Lease_Term,
+      }
+    }
+  }
+  res.send(json.stringify(reply) + "Is now deleted")
+});
+
+app.delete('/WorkSpace/delete/Price/:Price', (req, res) => {
+  const { Price } = req.params;
+  //Removes the WorkSpace that finds its Name legth
+  for (var i = 0, l = obj3.Work.length; i < l; i++) {
+    var myobj = obj3.Work[i].Price;
+    if(Price == myobj){
+      reply={
+        Price:req.params.Price,
       }
     }
   }
   res.send(json.stringify(reply) + "Is now deleted")
 });
 ///////////////////////////////
-
+///////////////////////////////
 
 ///////////////////////////////
 //OWNER ENDS HERE
-///////////////////////////////
+/////////////////////////////////
 //Co-Worker Begins
-//////////////////////////////
+/////////////////////////////////
 
 
-//S//E//A//R//C//H//I//N//G//
+////S//E//A//R//C//H//I//N//G////
 //This is for Searching up a place by each catigory
 
 //This is Address search
@@ -557,6 +660,8 @@ app.get('/user/find/:name', function (req, res) {
 
 
 
+
+///////////////////////////////
 
 
 

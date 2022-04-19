@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Propertie Modify</title>
+  <script src="JavaScript.js"></script>
+  <link rel="stylesheet" href="CSS.css">
+</head>
+<style>
+  #Titles{
+    text-align:center;
+  }
+  
+  .Spacing{
+    margin:auto;
+    margin-top:130px; 
+    width: 750px; 
+    border-radius: 10%; 
+    padding: 30px; 
+    background-color:#4f6bf3;
+  }
+  
+  #AddButton{
+    margin-left: 80%;
+    width:100px;
+  }
+</style>
+<body>
+  <div class="Spacing">
+    <form action = "/Modify/WorkSpace/Created" method = "put">
+  <h1 id="Titles">Modify WorkSpace</h1>
+  <br>
+  Old WorkSpace: <input type="text" name="ModifyWorkSpace">
+  <br>
+  New WorkSpace <input type="text" name="ModifyedWorkSpace">
+  
+  <br><br>
+
+  Old Max Individuals: <input type="text" name="ModifyMax_Individuals">
+  <br>
+  New Max Individuals: <input type="text" name="ModifyedMax_Individuals">
+  <br><br>
+  
+  Old Smoking allowed(Yes or No): <input type="text" name="ModifySmoking">
+  <br>
+  New Smoking allowed(Yes or No): <input type="text" name="ModifyedSmoking">
+  <br><br>
+
+  Old Avalible Date: <input type="text" name="ModifyAvalible_Date">
+  <br>
+  New Avalible Date: <input type="text" name="ModifyedAvalible_Date">
+  <br><br>
+
+  Old Lease Term: <input type="text" name="ModifyLease_Term">
+  <br>
+  New Lease Term: <input type="text" name="ModifyedLease_Term">
+  <br><br>
+
+  Old Price: <input type="text" name="ModifyPrice">
+  <br>
+  New Price: <input type="text" name="ModifyedPrice">
+  <br><br>
+
+
+  <br> <br>
+  <button type="submit" id="AddButton">Modify</button>
+
+  </div>
+</body>
+</html>
