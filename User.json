@@ -16,7 +16,7 @@
   "Prop": [
     {
       "Owner Name": "Bob",
-      "Address": "aaaaaaaaaaaaaaaaaaaaaaaaaaa1",
+      "Address": "TheAddress",
       "Neighborhood": "aaaaaaaaaaaaaaaaaaaaa",
       "Squarefeet": "aaaaaaaaaaaaaaaaaaaaaaa",
       "Parking_Garage": "aaaaaaaaaaaaaaaaaaaaaaaa",
@@ -26,7 +26,7 @@
   "Work": [
     {
       "Owner Name": "Bob",
-      "Address": "aaaaaaaaaaaaaaaaaaaaaaaaaaa1",
+      "Address": "TheAddress",
       "WorkSpace": "111111111111111111111111",
       "Max_Individuals": "2222222222222222222222222",
       "Smoking": "33333333333333333333333333333",

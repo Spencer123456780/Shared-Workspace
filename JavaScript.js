@@ -3,7 +3,7 @@ const app = express();
 const PORT = 8000;
 var bodyParser = require('body-parser');
 var fs = require('fs');
-const { json } = require('express/lib/response');
+const { json, get } = require('express/lib/response');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var urlencodedParser2 = bodyParser.urlencoded({ extended: false })
@@ -184,12 +184,12 @@ app.put('/Modify/Property/Created', function (req, res) {
   var reply;
 
 
-  for (var i = 0, l = obj3.Work.length; i < l; i++) {
-    var addobj = obj3.Work[i].ModifyAddress;
-    var negobj = obj3.Work[i].ModifyNeighborhood;
-    var squarobj = obj3.Work[i].ModifySquarefeet;
-    var parkobj = obj3.Work[i].ModifyParking_Garage;
-    var transobj = obj3.Work[i].ModifyPublic_Transport;
+  for (var i = 0, l = obj2.Prop.length; i < l; i++) {
+    var addobj = obj2.Prop[i].ModifyAddress;
+    var negobj = obj2.Prop[i].ModifyNeighborhood;
+    var squarobj = obj2.Prop[i].ModifySquarefeet;
+    var parkobj = obj2.Prop[i].ModifyParking_Garage;
+    var transobj = obj2.Prop[i].ModifyPublic_Transport;
 
     if(ModifyAddress == addobj){
       addobj = ModifyedAddress
@@ -213,7 +213,31 @@ app.put('/Modify/Property/Created', function (req, res) {
 
 
 
+
+
+app.get('/Modify/Address', function (req, res){
+  res.sendFile( __dirname + "/" + "ModifyAddress.html" );
+});
+
+
+app.patch('/Modify/Address/Created', function (req, res){
+  var UpAddress = document.getElementById('ModifyAddress').value;
+  var newAddress = document.getElementById('ModifyedAddress').value;
+
+  for (var i = 0, l = obj2.Prop.length; i < l; i++) {
+    var propUpAdd = obj2.Prop[i].UpAddress;
+    if (propUpAdd == UpAddress){
+      propUpAdd === newAddress;
+    }
+  }
+});
+
+
+
+
+
 //WorkSpace
+/*
 app.get('/Modify/WorkSpace', function (req, res){
   res.sendFile( __dirname + "/" + "Modify WorkSpace.html" );
 });
@@ -254,7 +278,7 @@ app.put('/Modify/WorkSpace/Created', function (req, res) {
     }
 
   res.send("all workspaces updated");
-});
+}); */
 ////////////////////////////////
 ////////////////////////////////
 
@@ -443,6 +467,7 @@ app.get('/Properties/Address/:Address', function (req, res) {
     if(Address == myobj){
       reply={
         Address:req.params.Address,
+        Name:obj2.Prop[i].Name,
         Neighborhood:obj2.Prop[i].Neighborhood,
         Squarefeet:obj2.Prop[i].Squarefeet,
         Parking_Garage:obj2.Prop[i].Parking_Garage,
@@ -463,6 +488,7 @@ app.get('/Properties/Neighborhood/:Neighborhood', function (req, res) {
     if(Neighborhood == myobj){
       reply={
         Neighborhood:req.params.Neighborhood,
+        Name:obj2.Prop[i].Name,
         Address:obj2.Prop[i].Address,
         Squarefeet:obj2.Prop[i].Squarefeet,
         Parking_Garage:obj2.Prop[i].Parking_Garage,
@@ -483,6 +509,7 @@ app.get('/Properties/Squarefeet/:Squarefeet', function (req, res) {
     if(Squarefeet == myobj){
       reply={
         Squarefeet:req.params.Squarefeet,
+        Name:obj2.Prop[i].Name,
         Address:obj2.Prop[i].Address,
         Neighborhood:obj2.Prop[i].Neighborhood,
         Parking_Garage:obj2.Prop[i].Parking_Garage,
@@ -503,6 +530,7 @@ app.get('/Properties/ParkingGarage/:Parking_Garage', function (req, res) {
     if(Parking_Garage == myobj){
       reply={
         Parking_Garage:req.params.Parking_Garage,
+        Name:obj2.Prop[i].Name,
         Address:obj2.Prop[i].Address,
         Neighborhood:obj2.Prop[i].Neighborhood,
         Squarefeet:obj2.Prop[i].Squarefeet,
@@ -523,6 +551,7 @@ app.get('/Properties/PublicTransport/Public_Transport', function (req, res) {
     if(Public_Transport == myobj){
       reply={
         Public_Transport:req.params.Public_Transport,
+        Name:obj2.Prop[i].Name,
         Address:obj2.Prop[i].Address,
         Neighborhood:obj2.Prop[i].Neighborhood,
         Squarefeet:obj2.Prop[i].Squarefeet,
@@ -543,6 +572,8 @@ app.get('/users/Properties/WorkSpace/MaxIndividuals/:Max_Individuals', function 
     if(Max_Individuals == myobj){
       reply={
         Max_Individuals:req.params.Max_Individuals,
+        Name:obj3.Work[i].Name,
+        Address:obj3.Work[i].Address,
         WorkSpace:obj3.Work[i].WorkSpace,
         Smoking:obj3.Work[i].Smoking,
         Avalible_Date:obj3.Work[i].Avalible_Date,
@@ -564,6 +595,8 @@ app.get('/WorkSpace/Smoking/:Smoking', function (req, res) {
     if(Smoking == myobj){
       reply={
         Smoking:req.params.Smoking,
+        Name:obj3.Work[i].Name,
+        Address:obj3.Work[i].Address,
         WorkSpace:obj3.Work[i].WorkSpace,
         Max_Individuals:obj3.Work[i].Max_Individuals,
         Avalible_Date:obj3.Work[i].Avalible_Date,
@@ -585,6 +618,8 @@ app.get('/WorkSpace/AvalibleDate/:Avalible_Date', function (req, res) {
     if(Avalible_Date == myobj){
       reply={
         Avalible_Date:req.params.Avalible_Date,
+        Name:obj3.Work[i].Name,
+        Address:obj3.Work[i].Address,
         WorkSpace:obj3.Work[i].WorkSpace,
         Max_Individuals:obj3.Work[i].Max_Individuals,
         Smoking:obj3.Work[i].Smoking,
@@ -606,6 +641,8 @@ app.get('/WorkSpace/LeaseTerm/:Lease_Term', function (req, res) {
     if(Lease_Term == myobj){
       reply={
         Lease_Term:req.params.Lease_Term,
+        Name:obj3.Work[i].Name,
+        Address:obj3.Work[i].Address,
         WorkSpace:obj3.Work[i].WorkSpace,
         Max_Individuals:obj3.Work[i].Max_Individuals,
         Smoking:obj3.Work[i].Smoking,
@@ -627,6 +664,8 @@ app.get('/WorkSpace/Price/:Price', function (req, res) {
     if(Price == myobj){
       reply={
         Price:req.params.Price,
+        Name:obj3.Work[i].Name,
+        Address:obj3.Work[i].Address,
         WorkSpace:obj3.Work[i].WorkSpace,
         Max_Individuals:obj3.Work[i].Max_Individuals,
         Smoking:obj3.Work[i].Smoking,
