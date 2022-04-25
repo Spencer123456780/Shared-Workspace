@@ -178,107 +178,131 @@ app.get('/Modify/Property', function (req, res){
 });
 
 
-app.put('/Modify/Property/Created', function (req, res) {
-  const { ModifyAddress,  ModifyNeighborhood, ModifySquarefeet, ModifyParking_Garage, ModifyPublic_Transport } = req.body;
-  const { ModifyedAddress, ModifyedNeighborhood, ModifyedSquarefeet, ModifyedParking_Garage, ModifyedPublic_Transport } = req.body;
-  var reply;
+app.patch('/Modifyed/Property', function Modify (req, res){
+  var modAddress = document.getElementById('ModifyAddress').value;
+  var modedAddress = document.getElementById('ModifyedAddress').value;
+
+  var modNeighborhood = document.getElementById('ModifyNeighborhood').value;
+  var modedNeighborhood = document.getElementById('ModifyedNeighborhood').value;
+
+  var modSquarefeet = document.getElementById('ModifySquarefeet').value;
+  var modedSquarefeet = document.getElementById('ModifyedSquarefeet').value;
+
+  var modParking_Garage = document.getElementById('ModifyParking_Garage').value;
+  var modedParking_Garage = document.getElementById('ModifyedParking_Garage').value;
+
+  var modPublic_Transport = document.getElementById('ModifyPublic_Transport').value;
+  var modedPublic_Transport = document.getElementById('ModifyedPublic_Transport').value;
 
 
   for (var i = 0, l = obj2.Prop.length; i < l; i++) {
-    var addobj = obj2.Prop[i].ModifyAddress;
-    var negobj = obj2.Prop[i].ModifyNeighborhood;
-    var squarobj = obj2.Prop[i].ModifySquarefeet;
-    var parkobj = obj2.Prop[i].ModifyParking_Garage;
-    var transobj = obj2.Prop[i].ModifyPublic_Transport;
+    var propUpAdd = obj2.Prop[i].Address; //Finding a object with the Address
+    var propNeighbor = obj2.Prop[i].Neighborhood; //Finding a object with the Neighborhood
+    var propSquare = obj2.Prop[i].Squarefeet; //Finding a object with the Squarefeet
+    var propParking = obj2.Prop[i].Parking_Garage; //Finding a object with the Parking_Garage
+    var propPublic = obj2.Prop[i].Public_Transport; //Finding a object with the Public_Transport
 
-    if(ModifyAddress == addobj){
-      addobj = ModifyedAddress
-      }
-      else if (ModifyNeighborhood == negobj){
-        negobj = ModifyedNeighborhood
-      }
-      else if (ModifySquarefeet == squarobj){
-        squarobj = ModifyedSquarefeet
-      }
-      else if (ModifyParking_Garage == parkobj){
-        parkobj = ModifyedParking_Garage
-      }
-      else if (ModifyPublic_Transport == transobj){
-        transobj = ModifyedPublic_Transport
+
+    if (propUpAdd == modAddress){ //Making sure that the Input is the same as the peremeter
+      if(modedAddress){
+        propUpAdd = modedAddress; //Makes the found Address the new address
       }
     }
-
-  res.send("all propertys updated");
-});
-
-
-
-
-
-app.get('/Modify/Address', function (req, res){
-  res.sendFile( __dirname + "/" + "ModifyAddress.html" );
-});
-
-
-app.patch('/Modify/Address/Created', function (req, res){
-  var UpAddress = document.getElementById('ModifyAddress').value;
-  var newAddress = document.getElementById('ModifyedAddress').value;
-
-  for (var i = 0, l = obj2.Prop.length; i < l; i++) {
-    var propUpAdd = obj2.Prop[i].UpAddress;
-    if (propUpAdd == UpAddress){
-      propUpAdd === newAddress;
+    if (propNeighbor == modNeighborhood){ //Making sure that the Input is the same as the peremeter
+      if(modedNeighborhood){
+        propNeighbor = modedNeighborhood; //Makes the found Neighborhood the new Neighborhood
+      }
     }
+    if (propSquare == modSquarefeet){ //Making sure that the Input is the same as the peremeter
+      if(modedSquarefeet){
+        propSquare = modedSquarefeet; //Makes the found Squarefeet the new Squarefeet
+      }
+    }
+    if (propParking == modParking_Garage){ //Making sure that the Input is the same as the peremeter
+      if(modedParking_Garage){
+        propParking = modedParking_Garage; //Makes the found Parking_Garage the new Parking_Garage
+      }
+    }  
+    if (propPublic == modPublic_Transport){ //Making sure that the Input is the same as the peremeter
+      if(modedPublic_Transport){
+        propPublic = modedPublic_Transport; //Makes the found Public_Transport the new Public_Transport
+      }
+    }  
   }
+  res.send('Property has been updated');
 });
+//if(modedAddress){
+ // propUpAdd.Address = modedAddress; //Makes the found Address the new address
+//}
 
-
-
-
-
-//WorkSpace
-/*
 app.get('/Modify/WorkSpace', function (req, res){
   res.sendFile( __dirname + "/" + "Modify WorkSpace.html" );
 });
 
 
-app.put('/Modify/WorkSpace/Created', function (req, res) {
-  const { ModifyWorkSpace,  ModifyMax_Individuals, ModifySmoking, ModifyAvalible_Date, ModifyLease_Term, ModifyPrice } = req.body;
-  const { ModifyedWorkSpace, ModifyedMax_Individuals, ModifyedSmoking, ModifyedAvalible_Date, ModifyedLease_Term, ModifyedPrice} = req.body;
-  var reply;
+app.patch('/Modifyed/WorkSpace', function (req, res){
+  var modWorkSpace = document.getElementById('ModifyWorkSpace').value;
+  var modedWorkSpace = document.getElementById('ModifyedWorkSpace').value;
+
+  var modMax_Individuals = document.getElementById('ModifyMax_Individuals').value;
+  var modedMax_Individuals = document.getElementById('ModifyedMax_Individuals').value;
+
+  var modSmoking = document.getElementById('ModifySmoking').value;
+  var modedSmoking = document.getElementById('ModifyedSmoking').value;
+
+  var modAvalible_Date = document.getElementById('ModifyAvalible_Date').value;
+  var modedAvalible_Date = document.getElementById('ModifyedAvalible_Date').value;
+
+  var modLease_Term = document.getElementById('ModifyLease_Term').value;
+  var modedLease_Term = document.getElementById('ModifyedLease_Term').value;
+
+  var modPrice = document.getElementById('ModifyPrice').value;
+  var modedPrice = document.getElementById('ModifyedPrice').value;
 
 
-  for (var i = 0, l = obj3.Work.length; i < l; i++) {
-    var workobj = obj3.Work[i].ModifyWorkSpace;
-    var maxobj = obj3.Work[i].ModifyMax_Individuals;
-    var smokeobj = obj3.Work[i].ModifySmoking;
-    var avalobj = obj3.Work[i].ModifyAvalible_Date;
-    var leaseobj = obj3.Work[i].ModifyLease_Term;
-    var pricobj = obj3.Work[i].ModifyPrice;
+  for (var i = 0, l = obj2.Prop.length; i < l; i++) {
+    var workName = obj3.Work[i].WorkSpace; //Finding a object with the Address
+    var workIndividual = obj3.Work[i].Max_Individuals;
+    var workSmoke = obj3.Work[i].Smoking;
+    var workAvalible = obj3.Work[i].Avalible_Date;
+    var workLease = obj3.Work[i].Lease_Term;
+    var workPrice = obj3.Work[i].Price;
 
-    if(ModifyWorkSpace == workobj){
-      workobj = ModifyedWorkSpace
-      }
-      else if (ModifyMax_Individuals == maxobj){
-        maxobj = ModifyedMax_Individuals
-      }
-      else if (ModifySmoking == smokeobj){
-        smokeobj = ModifyedSmoking
-      }
-      else if (ModifyAvalible_Date == avalobj){
-        avalobj = ModifyedAvalible_Date
-      }
-      else if (ModifyLease_Term == leaseobj){
-        leaseobj = ModifyedLease_Term
-      }
-      else if (ModifyPrice == pricobj){
-        pricobj = ModifyedPrice
+    if (workName == modWorkSpace){ //Making sure that the Input is the same as the peremeter
+      if(modedWorkSpace){
+        workName = modedWorkSpace;//Making the object change
       }
     }
+    if (workIndividual == modMax_Individuals){ //Making sure that the Input is the same as the peremeter
+      if(modedMax_Individuals){
+        workIndividual = modedMax_Individuals;//Making the object change
+      }
+    }
+    if (workSmoke == modSmoking){ //Making sure that the Input is the same as the peremeter
+      if(modedSmoking){
+        workSmoke = modedSmoking;//Making the object change
+      }
+    }
+    if (workAvalible == modAvalible_Date){ //Making sure that the Input is the same as the peremeter
+      if(modedAvalible_Date){
+        workAvalible = modedAvalible_Date;//Making the object change
+      }
+    }
+    if (workLease == modLease_Term){ //Making sure that the Input is the same as the peremeter
+      if(modedLease_Term){
+        workLease = modedLease_Term;//Making the object change
+      }
+    }
+    if (workPrice == modPrice){ //Making sure that the Input is the same as the peremeter
+      if(modedPrice){
+        workPrice = modedPrice; //Making the object change
+      }
+    }
+  }
+  res.send('WorkSpace has been updated');
+});
 
-  res.send("all workspaces updated");
-}); */
+
 ////////////////////////////////
 ////////////////////////////////
 

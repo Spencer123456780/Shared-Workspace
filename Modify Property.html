@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modify Properties</title>
+    <script src="JavaScript.js"></script>
 </head>
 <style>
     #Titles{
@@ -27,7 +28,7 @@
   </style>
 <body>
     <div class="Spacing">
-    <form action = "/Modify/Property/Created" method = "post">
+    
     <h1 id="Titles">Modify Property</h1>
     
     Old Address: <input type="text" name="ModifyAddress">
@@ -59,7 +60,7 @@
 
     <br><br>
 
-    <button type="submit" id="AddButton">Modify</button>
+    <button type="submit" id="AddButton" onclick="Modify(req, res)">Modify</button>
   </div>
 </body>
 </html>
