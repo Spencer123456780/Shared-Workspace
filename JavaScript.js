@@ -227,7 +227,7 @@ app.patch('/Modifyed/Property', function Modify (req, res){
       if(modedPublic_Transport){
         propPublic = modedPublic_Transport; //Makes the found Public_Transport the new Public_Transport
       }
-    }  
+    }
   }
   res.send('Property has been updated');
 });
@@ -324,6 +324,7 @@ app.delete('/Properties/delete/Address/:Address', (req, res) => {
       }
     }
   }
+  myobj === "";
   res.send(JSON.stringify(reply) + "Is now Deleted");
 });
 
@@ -338,6 +339,7 @@ app.delete('/Properties/delete/Neighborhood/:Neighborhood', (req, res) => {
       }
     }
   }
+  myobj === "";
   res.send(JSON.stringify(reply) + "Is now Deleted");
 });
 
@@ -352,6 +354,7 @@ app.delete('/Properties/delete/Squarefeet/:Squarefeet', (req, res) => {
       }
     }
   }
+  myobj === "";
   res.send(JSON.stringify(reply) + "Is now Deleted");
 });
 
@@ -366,6 +369,7 @@ app.delete('/Properties/delete/Parking_Garage/:Parking_Garage', (req, res) => {
       }
     }
   }
+  myobj === "";
   res.send(JSON.stringify(reply) + "Is now Deleted");
 });
 
@@ -380,6 +384,7 @@ app.delete('/Properties/delete/:Public_Transport', (req, res) => {
       }
     }
   }
+  myobj === "";
   res.send(JSON.stringify(reply) + "Is now Deleted");
 });
 
@@ -396,6 +401,7 @@ app.delete('/WorkSpace/delete/WorkSpace/:WorkSpace', (req, res) => {
       }
     }
   }
+  myobj === "";
   res.send(json.stringify(reply) + "Is now deleted")
 });
 
@@ -410,6 +416,7 @@ app.delete('/WorkSpace/delete/Max_Individuals/:Max_Individuals', (req, res) => {
       }
     }
   }
+  myobj === "";
   res.send(json.stringify(reply) + "Is now deleted")
 });
 
@@ -424,6 +431,7 @@ app.delete('/WorkSpace/delete/Smoking/:Smoking', (req, res) => {
       }
     }
   }
+  myobj === "";
   res.send(json.stringify(reply) + "Is now deleted")
 });
 
@@ -438,6 +446,7 @@ app.delete('/WorkSpace/delete/Avalible_Date/:Avalible_Date', (req, res) => {
       }
     }
   }
+  myobj === "";
   res.send(json.stringify(reply) + "Is now deleted")
 });
 
@@ -452,6 +461,7 @@ app.delete('/WorkSpace/delete/Lease_Term/:Lease_Term', (req, res) => {
       }
     }
   }
+  myobj === "";
   res.send(json.stringify(reply) + "Is now deleted")
 });
 
@@ -466,6 +476,7 @@ app.delete('/WorkSpace/delete/Price/:Price', (req, res) => {
       }
     }
   }
+  myobj === ""; //Sets to a blank string
   res.send(json.stringify(reply) + "Is now deleted")
 });
 ///////////////////////////////
@@ -585,6 +596,10 @@ app.get('/Properties/PublicTransport/Public_Transport', function (req, res) {
   }
   res.send(JSON.stringify(reply));
 });
+
+
+
+/////////////////////////////////
 
 //This is number of individuals it can seat
 app.get('/users/Properties/WorkSpace/MaxIndividuals/:Max_Individuals', function (req, res) {
@@ -708,12 +723,12 @@ app.get('/user/find/:name', function (req, res) {
   var reply;
 
   for (var i = 0, l = obj.user.length; i < l; i++) {
-    var myobj = obj.user[i].first_name;
+    var myobj = obj.user[i].firstName;
     if(name == myobj){
       reply={
-        first_name:req.params.name,
-        phone_number:obj.user[i].phone_number,
-        E_mail:obj.user[i].E_mail,
+        firstName:req.params.name,
+        phone_number:obj.user[i].phoneNumber,
+        E_mail:obj.user[i].eMail,
         Role:obj.user[i].Role,
       }
     }
@@ -722,11 +737,6 @@ app.get('/user/find/:name', function (req, res) {
 });
 ////////////////////////////////
 
-
-
-
-
-///////////////////////////////
 
 
 

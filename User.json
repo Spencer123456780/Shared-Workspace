@@ -33,6 +33,30 @@
       "Avalible_Date": "44444444444444444444444444",
       "Lease_Term": "55555555555555555555555555",
       "Price": "6666666666666666666666666666666"
+    },
+    {
+      "WorkSpace": "WorkSpace2",
+      "Max_Individuals": "10",
+      "Smoking": "No",
+      "Avalible_Date": "2022-1-1",
+      "Lease_Term": "4",
+      "Price": "500"
+    },
+    {
+      "WorkSpace": "awgwagwa",
+      "Max_Individuals": "gwagwag",
+      "Smoking": "awgwag",
+      "Avalible_Date": "gwagwa",
+      "Lease_Term": "awgwag",
+      "Price": "awgg"
+    },
+    {
+      "WorkSpace": "newSpace",
+      "Max_Individuals": "99",
+      "Smoking": "Yes",
+      "Avalible_Date": "2022-7-7",
+      "Lease_Term": "9",
+      "Price": "900"
     }
   ]
 }
