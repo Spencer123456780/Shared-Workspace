@@ -77,6 +77,7 @@ var Savedata = fs.existsSync('User.json')
   //obj.user.properties.push I am trying to push a new object inside of an existing object
   function SavingPropertie(req, res) {
     obj2.Prop.push ({
+      Name:req.body.Name,
       Address:req.body.Address,
       Neighborhood:req.body.Neighborhood,
       Squarefeet:req.body.Squarefeet,
@@ -104,6 +105,8 @@ app.post('/WorkspaceCreated', urlencodedParser3, SaviningWorkSpace);
 
 function SaviningWorkSpace(req, res) {
 obj3.Work.push ({
+  Name:req.body.Name,
+  Address:req.body.Address,
   WorkSpace:req.body.WorkSpace,
   Max_Individuals:req.body.Max_Individuals,
   Smoking:req.body.Smoking,
